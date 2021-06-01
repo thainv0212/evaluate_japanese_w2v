@@ -52,18 +52,18 @@ def load_keyvector(file_path):
     """
     _, ext = os.path.splitext(file_path)
     if ext == '.model':
-        model = gensim.models.Word2Vec.load(file_path)
+        model = gensim.models.word2vec.Word2Vec.load(file_path)
         wv = model.wv
         del model
         return wv
     elif ext == '.bin':
-        wv = gensim.models.KeyedVectors.load_word2vec_format(datapath(file_path), binary=True)
+        wv = gensim.models.word2vec.KeyedVectors.load_word2vec_format(datapath(file_path), binary=True)
         return wv
     elif ext == '.txt' or ext == '.vec':
-        wv = gensim.models.KeyedVectors.load_word2vec_format(datapath(file_path), binary=False)
+        wv = gensim.models.word2vec.KeyedVectors.load_word2vec_format(datapath(file_path), binary=False)
         return wv
     elif ext == '.kv':
-        wv = gensim.models.KeyedVectors.load(file_path, mmap='r')
+        wv = gensim.models.word2vec.KeyedVectors.load(file_path, mmap='r')
         return wv
     else:
         logger.warning("Cant load extension {} data".format(ext))
@@ -139,7 +139,7 @@ def cal_wv_similarity(dataset, wv, oov_score=-1, tokenizer=None):
     oov_cnt = 0
     for i, d in enumerate(dataset.gold_data):
         word1, word2 = d.word1, d.word2
-        if (word1 in wv.vocab) and (word2 in wv.vocab):
+        if (word1 in wv.key_to_index.keys()) and (word2 in wv.key_to_index.keys()):
             sim = wv.similarity(word1, word2)
         else:
             if tokenizer is not None:

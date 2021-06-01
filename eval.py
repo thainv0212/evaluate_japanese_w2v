@@ -64,7 +64,7 @@ def main():
     column_indexes = args.col
 
     wv = load_keyvector(model_path)
-    logger.info('Word vector {} dim, Vocab size {}'.format(wv.vector_size, len(wv.vocab)))
+    logger.info('Word vector {} dim, Vocab size {}'.format(wv.vector_size, len(wv.key_to_index)))
 
     # set tokenizer : mecab or sudachipy
     tokenizer = None
