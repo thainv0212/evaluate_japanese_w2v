@@ -8,7 +8,7 @@
 [mecab-python3](https://pypi.org/project/mecab-python3/) and [SudachiPy](https://pypi.org/project/SudachiPy/) for tokenizing Japanese
 
 ## Requirements
-
+- python 3.8
 - chardet
 - numpy
 - scipy
